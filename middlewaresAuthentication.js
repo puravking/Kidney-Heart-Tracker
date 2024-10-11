@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 app.get("/authentication",(req,res)=>{
-    const username = req.headers.username;
+    const username = req.headers.username; 
     const password = req.headers.password;
 
     const kidneyId = req.query.kidneys;
