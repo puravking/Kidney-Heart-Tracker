@@ -6,7 +6,7 @@ app.get("/authentication",(req,res)=>{
     const username = req.headers.username;
     const password = req.headers.password;
 
-    const kidneyId = req.query.kidneys;
+    const kidneyId = req.query.kidneys; 
 
     if((username != "purav" ||
          password != "purav1234")) {
