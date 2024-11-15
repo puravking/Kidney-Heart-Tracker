@@ -8,17 +8,32 @@
 </style>
 <html>
     <script>
+        let timeOut;
+        function debouncedPopulateDiv() {
+            //delay the call to populateDiv untill ive not been called for 100ms
+            // and ive called at least nce
+            // clearTimeout
+            clearTimeout(timeOut);
+            timeOut = setTimeout(()=>{
+                populateDiv()
+            },100);
+        }
         function populateDiv() {
             const element = document.getElementById("finalSum");
             const a = document.getElementById("firstNumber").value;
             const b = document.getElementById("secondNumber").value;
-            element.innerHTML = parseInt(a) + parseInt(b);
+            fetch("http://localhost:3000/sum?a="+a+"&b="+b)
+            .then((response)=>{
+                response.text()
+                    .then((ans)=>{
+                        document.getElementById("finalSum").innerHTML = ans;
+                    })
+            });
         }
     </script>
     <body >
-        <input id="firstNumber" type="text" placeholder="first number" class="design"></input><br><br><br>
-        <input id="secondNumber" type="text" placeholder="second number" class="design"></input><br><br><br>
-        <br><button onclick="populateDiv()">Calculate sum</button>
+        <input oninput="debouncedPopulateDiv()" id="firstNumber" type="text" placeholder="first number" class="design"></input><br><br><br>
+        <input oninput="debouncedPopulateDiv()" id="secondNumber" type="text" placeholder="second number" class="design"></input><br><br><br>
         <div id = "finalSum"></div>
     </body>
 </html>
