@@ -1,5 +1,4 @@
 const express = require("express");
-
 const app = express();
 function isOldEnough(age) {
     if(age>=14) {
